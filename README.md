@@ -1,14 +1,16 @@
 # Gym Management System
 
-A gym management system is a desktop application that allows gym owners and staff to manage their gym operations, including memberships, customer profiles, and billing. This .NET MAUI Blazor application is designed to help gym owners and staff manage their gym operations efficiently and effectively via database connection.
+A gym management system is a desktop application that allows gym owners and staff to manage their gym operations, including memberships, customer profiles, staff, and billing. This .NET MAUI Blazor application is designed to help gym owners and staff manage their gym operations efficiently and effectively via database connection.
 
 ## Features ##
 
 This gym management system includes the following features:
 
 -User authentication and role-based access control <br>
+-View current members, customers or staff depending on what is selected <br>
 -Membership management (create, update, and delete memberships) <br>
 -Customer management (create, update, and delete customer profiles) <br>
+-Staff management (create, update, and delete staff profiles) <br>
 -Billing management (track customer payments and generate invoices) <br>
 
 ## Getting Started ##
