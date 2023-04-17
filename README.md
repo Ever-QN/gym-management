@@ -11,7 +11,7 @@ This gym management system includes the following features:
 -Membership management (create, update, and delete memberships) <br>
 -Customer management (create, update, and delete customer profiles) <br>
 -Staff management (create, update, and delete staff profiles) <br>
--Billing management (track customer payments and generate invoices) <br>
+-Billing management (track customer payments, membership payments and generate invoices) <br>
 
 ## Getting Started ##
 
