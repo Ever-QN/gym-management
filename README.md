@@ -31,4 +31,4 @@ Once you have the gym management system up and running, you can use it to manage
 
 ## Contributors ##
 
-This gym management system was created by Quynh Ngo, Savanna Piscitelli, and Jonah Scott (ever-qn, SavannaPisc, jonahscott)
+This gym management system was created by Quynh Ngo, Savanna Piscitelli, and Jonah Scott (Ever-QN, SavannaPisc, jonahscott)
