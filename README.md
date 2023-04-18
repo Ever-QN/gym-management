@@ -26,6 +26,7 @@ To get started with this gym management system, follow these steps:
 
 Once you have the gym management system up and running, you can use it to manage your gym operations. Some key usage scenarios include:
 
+-Viewing a specific member, previous customer or current employees <br>
 -Creating new memberships and adding customers to them <br>
 -Tracking customer payments and generating invoices for outstanding balances <br>
 
