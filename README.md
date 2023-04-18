@@ -13,15 +13,6 @@ This gym management system includes the following features:
 -Staff management (create, update, and delete staff profiles) <br>
 -Billing management (track customer payments, membership payments and generate invoices) <br>
 
-## Getting Started ##
-
-To get started with this gym management system, follow these steps:
-
-1. Install the latest version of .NET MAUI Blazor. <br>
-2. Clone the repository to your local machine. <br>
-3. Open the project in Visual Studio or your preferred IDE. <br>
-4. Build and run the application. <br>
-
 ## Usage ##
 
 Once you have the gym management system up and running, you can use it to manage your gym operations. Some key usage scenarios include:
