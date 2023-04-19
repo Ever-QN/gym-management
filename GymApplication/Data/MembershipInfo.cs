@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GymApplication.Data
 {
-    internal class MembershipInfo
+    public class MembershipInfo
     {
     }
 }
