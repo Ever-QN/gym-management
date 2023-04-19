@@ -1,28 +1,27 @@
-﻿using gym_management.Data;
-using Microsoft.AspNetCore.Components.WebView.Maui;
+﻿using Microsoft.AspNetCore.Components.WebView.Maui;
+using gym_application.Data;
 
-namespace gym_management
+namespace gym_application;
+
+public static class MauiProgram
 {
-	public static class MauiProgram
+	public static MauiApp CreateMauiApp()
 	{
-		public static MauiApp CreateMauiApp()
-		{
-			var builder = MauiApp.CreateBuilder();
-			builder
-				.UseMauiApp<App>()
-				.ConfigureFonts(fonts =>
-				{
-					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				});
+		var builder = MauiApp.CreateBuilder();
+		builder
+			.UseMauiApp<App>()
+			.ConfigureFonts(fonts =>
+			{
+				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+			});
 
-			builder.Services.AddMauiBlazorWebView();
-#if DEBUG
+		builder.Services.AddMauiBlazorWebView();
+		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
+		
+		builder.Services.AddSingleton<WeatherForecastService>();
 
-			builder.Services.AddSingleton<WeatherForecastService>();
-
-			return builder.Build();
-		}
+		return builder.Build();
 	}
 }

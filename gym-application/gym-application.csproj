@@ -6,18 +6,18 @@
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
         <OutputType>Exe</OutputType>
-        <RootNamespace>gym_management</RootNamespace>
+        <RootNamespace>gym_application</RootNamespace>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
 
         <!-- Display name -->
-        <ApplicationTitle>gym-management</ApplicationTitle>
+        <ApplicationTitle>gym-application</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.gym_management</ApplicationId>
-        <ApplicationIdGuid>3BB3C628-C039-4830-95A7-7244F2D3585A</ApplicationIdGuid>
+        <ApplicationId>com.companyname.gym_application</ApplicationId>
+        <ApplicationIdGuid>99A91DF3-698F-4F46-AAAF-31BE3C2B7A6F</ApplicationIdGuid>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

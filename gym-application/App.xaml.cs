@@ -1,12 +1,11 @@
-﻿namespace gym_management
-{
-	public partial class App : Application
-	{
-		public App()
-		{
-			InitializeComponent();
+﻿namespace gym_application;
 
-			MainPage = new MainPage();
-		}
+public partial class App : Application
+{
+	public App()
+	{
+		InitializeComponent();
+
+		MainPage = new MainPage();
 	}
 }
