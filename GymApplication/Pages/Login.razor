@@ -2,24 +2,26 @@
 
 <h3>Login</h3>
 
-<EditForm Model="@login" OnValidSubmit="Submit">
+<EditForm Model="@login" OnValidSubmit="SubmitForm">
     <div class="form-group">
         <label>Email address</label>
     </div>
 
     <div class="mt-2 form-group">
         <label>Password</label>
-        <input type="password" @bind-value="loginModel.Password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password">
     </div>
 
     <div class="text-center mt-2">
-        <button class="btn btn-primary" type="submit">
-            <span class="@_spinnerClass" role="status" aria-hidden="true"></span>
-            SignIn
-        </button>
+        <button class="btn btn-primary" type="submit">Sign in</button>
     </div>
 </EditForm>
 
 @code {
+    Login login = new();
 
+    private void SubmitForm()
+    {
+        
+    }
 }
