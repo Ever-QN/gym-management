@@ -1,10 +1,12 @@
 ﻿@page "/"
+@using GymApplication.Models;
 
 <h3>Login</h3>
 
-<EditForm Model="@login" OnValidSubmit="SubmitForm">
+<EditForm Model="@loginModel" OnValidSubmit="SubmitForm">
     <div class="form-group">
         <label>Email address</label>
+        <ValidationMessage For="@(()=> loginModel.Email)"
     </div>
 
     <div class="mt-2 form-group">
@@ -18,7 +20,7 @@
 </EditForm>
 
 @code {
-    Login login = new();
+    LoginModel loginModel = new();
 
     private void SubmitForm()
     {
