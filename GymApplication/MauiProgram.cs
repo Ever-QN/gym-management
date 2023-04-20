@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using GymApplication.Data;
+using GymApplication.Services;
 
 namespace GymApplication;
 
@@ -19,9 +20,9 @@ public static class MauiProgram
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-		
-		
 
-		return builder.Build();
+		builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+
+        return builder.Build();
 	}
 }

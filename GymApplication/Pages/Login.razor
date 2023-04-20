@@ -1,14 +1,8 @@
-﻿@page "/"
+﻿@page "/login"
 @using GymApplication.Models;
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@using Microsoft.AspNetCore.Components.Authorization;
 
 <h1>Administrator Login</h1>
-<AuthorizeView>
-    <Authorized>
-        <p>You are already logged in.</p>
-    </Authorized>
-</AuthorizeView>
+
 <EditForm Model="@loginModel" OnValidSubmit="SubmitForm">
 
     <DataAnnotationsValidator/>
@@ -32,8 +26,21 @@
 @code {
     LoginModel loginModel = new();
 
-    private void SubmitForm()
+    private bool isAuthenticated = false;
+
+    private async void SubmitForm()
     {
-        
+        if (loginModel.Email == "admin@example.ca" && loginModel.Password == "password")
+        {
+            isAuthenticated = true;
+            NavigationManager.NavigateTo("/dashboard");
+        }
+        else
+        {
+            isAuthenticated = false;
+            await Task.Delay(1000);
+            loginModel.Password = "";
+            StateHasChanged();
+        }
     }
 }
