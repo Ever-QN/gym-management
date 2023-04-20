@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using GymApplication.Data;
-using GymApplication.Services;
 
 namespace GymApplication;
 
