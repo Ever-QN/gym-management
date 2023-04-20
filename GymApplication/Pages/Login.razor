@@ -1,8 +1,14 @@
 ﻿@page "/"
 @using GymApplication.Models;
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization;
 
 <h1>Administrator Login</h1>
-
+<AuthorizeView>
+    <Authorized>
+        <p>You are already logged in.</p>
+    </Authorized>
+</AuthorizeView>
 <EditForm Model="@loginModel" OnValidSubmit="SubmitForm">
 
     <DataAnnotationsValidator/>
