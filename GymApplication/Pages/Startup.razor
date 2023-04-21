@@ -1,0 +1,14 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+
+<h3>Startuph</h3>
+
+Loading....
+
+@code {
+
+
+	protected async override Task OnInitializedAsync()
+	{
+		await Task.Run(() => NavigationManager.NavigateTo("/login"));
+	}
