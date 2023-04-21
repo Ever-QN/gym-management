@@ -1,7 +1,9 @@
 ﻿@page "/addupdateadmin"
+@page "/updateproduct/{AdminId:int}"
 @using GymApplication.Data
 @using GymApplication.Services
 @inject AdminService adminService
+@inject NavigationManager navigationManager
 
 <h3>Edit Admin Info</h3>
 
@@ -21,6 +23,7 @@
 		</div>
 
 		<button type="submit" class="btn btn-sm btn-success" @onclick="AddAdminInfo">Submit</button>
+		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Submit</button>
 	</div>
 </div>
 
@@ -52,5 +55,10 @@
 		{
 			await App.Current.MainPage.DisplayAlert("Saved", "Save File", "OK");
 		}
+	}
+
+	public void BackToList()
+	{
+		navigationManager.NavigateTo("adminList");
 	}
 }

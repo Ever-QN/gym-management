@@ -41,15 +41,15 @@ namespace GymApplication.Services
             return await Task.FromResult(true);
         }
 
-		public async Task<bool> DeleteAdminAsync(int AdminId)
+		public async Task<bool> DeleteAdminAsync(int adminId)
 		{
-			await con.DeleteAsync<AdminInfo>(AdminId);
+			await con.DeleteAsync<AdminInfo>(adminId);
             return await Task.FromResult(true);
 		}
 
-		public async Task<AdminInfo> GetAdminInfoAsync(int AdminId) 
+		public async Task<AdminInfo> GetAdminInfoAsync(int adminId) 
         {
-            return await con.Table<AdminInfo>().Where(x => x.AdminId == AdminId).FirstOrDefaultAsync();
+            return await con.Table<AdminInfo>().Where(x => x.AdminId == adminId).FirstOrDefaultAsync();
         }
 
 		public async Task<IEnumerable<AdminInfo>> GetAdminInfoAsync()
