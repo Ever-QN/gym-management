@@ -1,0 +1,66 @@
+﻿@page "/adminList"
+@using GymApplication.Services
+@using GymApplication.Data
+@inject AdminService adminService
+@inject NavigationManager navigationManager
+
+
+<h3>AdminList</h3>
+
+@if (adminList == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<button class="btn btn-primary" @onclick="AddNewAdmin">Add New</button>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Email</th>
+				<th>Password</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var admin in adminList)
+			{
+				<tr>
+					<td>@admin.AdminId</td>
+					<td>@admin.AdminEmail</td>
+					<td>@admin.AdminPassword</td>
+					<td>
+						<button class="btn btn-info" @onclick=@(() => UpdateAdmin(admin))>Edit</button>
+						<button class="btn btn-info" @onclick=@(() => DeleteAdmin(admin))>Delete</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+    private IEnumerable<AdminInfo> adminList;
+
+    protected override async Task OnInitializedASync()
+    {
+		adminList = await adminService.GetAdminInfoAsync();
+	}
+
+	public void AddNewAdmin()
+	{
+		navigationManager.NavigateTo("addupdateadmin");
+	}
+
+	public void UpdateAdmin(AdminInfo adminInfo)
+	{
+		navigationManager.NavigateTo($"updateadmin/{adminInfo.AdminId}");
+	}
+
+	public async void DeleteAdmin(AdminInfo adminInfo)
+	{
+		await adminService.DeleteAdminAsync(adminInfo.AdminId);
+		adminList = await adminService.GetAdminInfoAsync();
+		this.StateHasChanged();
+	}
+}

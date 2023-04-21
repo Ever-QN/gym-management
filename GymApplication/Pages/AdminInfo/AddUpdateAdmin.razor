@@ -1,6 +1,7 @@
 ﻿@page "/addupdateadmin"
 @using GymApplication.Data
 @using GymApplication.Services
+@inject AdminService adminService
 
 <h3>Edit Admin Info</h3>
 
@@ -35,6 +36,21 @@
 		admin.AdminEmail = adminEmail;
 		admin.AdminPassword = adminPassword;
 
-		var response = await admin.AddUpdateAdminAsync(admin);
+		var response = await adminService.AddUpdateAdminAsync(admin);
+		if (response)
+		{
+			if (adminId == 0)
+			{
+				await App.Current.MainPage.DisplayAlert("Saved", "Save Success", "OK");
+			}
+			else
+			{
+				await App.Current.MainPage.DisplayAlert("Updated", "Update Success", "OK");
+			}
+		}
+		else
+		{
+			await App.Current.MainPage.DisplayAlert("Saved", "Save File", "OK");
+		}
 	}
 }
