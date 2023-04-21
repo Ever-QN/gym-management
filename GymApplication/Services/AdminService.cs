@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GymApplication.Services
 {
-    internal class AdminService
+    public class AdminService
     {
     }
 }
