@@ -9,13 +9,13 @@
     <DataAnnotationsValidator/>
     <div class="form-group">
         <label>Email address</label>
-        <input type="email" @bind="loginModel.Email" class="form-control" placeholder="Email" />
+        <input type="email" @bind="loginModel.Email" class="form-control" placeholder="admin@example.ca" />
         <ValidationMessage For="@(()=> loginModel.Email)"/>
     </div>
 
     <div class="mt-2 form-group">
         <label>Password</label>
-        <input type="password" @bind="loginModel.Password" class="form-control" placeholder="Password">
+        <input type="password" @bind="loginModel.Password" class="form-control" placeholder="password">
         <ValidationMessage For="@(()=> loginModel.Password)" />
     </div>
 
@@ -25,14 +25,18 @@
 </EditForm>
 
 @code {
-    LoginModel loginModel = new();
+    LoginModel loginModel = new()
+        {
+            Email = "admin@example.ca",
+            Password = "password"
+        };
 
-    private string email = "admin@example.ca";
-    private string password = "password";
+    private string emailInput = "admin@example.ca";
+    private string passwordInput = "password";
 
     private void SubmitForm()
     {
-        if (loginModel.Email == email && loginModel.Password == password)
+        if (loginModel.Email == emailInput && loginModel.Password == passwordInput)
         {
             LoginModel.isAuthenticated = true;
             NavigationManager.NavigateTo("/dashboard");
