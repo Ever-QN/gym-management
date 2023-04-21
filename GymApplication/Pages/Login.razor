@@ -29,9 +29,12 @@
 
     private bool isAuthenticated = false;
 
+    private string email = "admin@example.ca";
+    private string password = "password";
+
     private async void SubmitForm()
     {
-        if (loginModel.Email == "admin@example.ca" && loginModel.Password == "password")
+        if (loginModel.Email == email && loginModel.Password == password)
         {
             isAuthenticated = true;
             NavigationManager.NavigateTo("/dashboard");
