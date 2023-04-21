@@ -7,7 +7,7 @@ This gym management system is a desktop application that allows gym owners and s
 This gym management system includes the following features:
 
 -User administration authentication  <br>
--Administrator management (create, update, and delete memberships) <br>
+-Viewing the entire database <br>
 -Membership management (create, update, and delete memberships) <br>
 -Customer management (create, update, and delete customer profiles) <br>
 -Staff management (create, update, and delete staff profiles) <br>
