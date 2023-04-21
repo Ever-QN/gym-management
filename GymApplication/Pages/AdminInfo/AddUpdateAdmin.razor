@@ -1,5 +1,40 @@
-﻿<h3>AddUpdateAdmin</h3>
+﻿@page "/addupdateadmin"
+@using GymApplication.Data
+@using GymApplication.Services
+
+<h3>Edit Admin Info</h3>
+
+<div>
+	<div class="col-md-6">
+		<div class="mb-3">
+			<label class="form-label">Admin ID:</label>
+			<input type="text" @bind="adminId" class="form-control" placeholder="Admin ID" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Admin Email:</label>
+			<input type="text" @bind="adminEmail" class="form-control" placeholder="Admin Email" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Admin ID:</label>
+			<input type="text" @bind="adminPassword" class="form-control" placeholder="Admin Password" />
+		</div>
+
+		<button type="submit" class="btn btn-sm btn-success" @onclick="AddAdminInfo">Submit</button>
+	</div>
+</div>
 
 @code {
+	private int adminId = 0;
+	private string adminEmail = "";
+	private string adminPassword = "";
 
+	public async void AddAdminInfo()
+	{
+		var admin = new AdminInfo();
+		admin.AdminId = adminId;
+		admin.AdminEmail = adminEmail;
+		admin.AdminPassword = adminPassword;
+
+		var response = await admin.AddUpdateAdminAsync(admin);
+	}
 }
