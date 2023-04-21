@@ -33,12 +33,12 @@
             Password = "password"
         };
 
-    private string emailInput = "admin@example.ca";
-    private string passwordInput = "password";
+    private string validEmail = "admin@example.ca";
+    private string validPassword = "password";
 
     private void SubmitForm()
     {
-        if (loginModel.Email == emailInput && loginModel.Password == passwordInput)
+        if (loginModel.Email == validEmail && loginModel.Password == validPassword)
         {
             LoginModel.isAuthenticated = true;
             NavigationManager.NavigateTo("/dashboard");
