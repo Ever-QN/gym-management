@@ -5,7 +5,7 @@
 @inject NavigationManager navigationManager
 
 
-<h3>AdminList</h3>
+<h3>Manage Administrators</h3>
 
 @if (adminList == null)
 {
@@ -42,9 +42,9 @@ else
 @code {
     private IEnumerable<AdminInfo> adminList;
 
-    protected override async Task OnInitializedASync()
-    {
-		adminList = await adminService.GetAdminInfoAsync();
+	protected async override Task OnInitializedAsync()
+	{
+		adminList = await adminService.GetAdminAsync();
 	}
 
 	public void AddNewAdmin()
@@ -60,7 +60,7 @@ else
 	public async void DeleteAdmin(AdminInfo adminInfo)
 	{
 		await adminService.DeleteAdminAsync(adminInfo.AdminId);
-		adminList = await adminService.GetAdminInfoAsync();
+		adminList = await adminService.GetAdminAsync();
 		this.StateHasChanged();
 	}
 }

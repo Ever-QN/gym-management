@@ -47,12 +47,12 @@ namespace GymApplication.Services
             return await Task.FromResult(true);
 		}
 
-		public async Task<AdminInfo> GetAdminInfoAsync(int adminId) 
+		public async Task<AdminInfo> GetAdminAsync(int adminId) 
         {
             return await con.Table<AdminInfo>().Where(x => x.AdminId == adminId).FirstOrDefaultAsync();
         }
 
-		public async Task<IEnumerable<AdminInfo>> GetAdminInfoAsync()
+		public async Task<IEnumerable<AdminInfo>> GetAdminAsync()
 		{
             await InitAsync();
             return await Task.FromResult(await con.Table<AdminInfo>().ToListAsync());

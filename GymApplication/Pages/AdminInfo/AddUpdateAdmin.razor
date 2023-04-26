@@ -7,7 +7,7 @@
 
 <h3>Edit Admin Info</h3>
 
-<div>
+<div class="row">
 	<div class="col-md-6">
 		<div class="mb-3">
 			<label class="form-label">Admin ID:</label>
@@ -23,11 +23,14 @@
 		</div>
 
 		<button type="submit" class="btn btn-sm btn-success" @onclick="AddAdminInfo">Submit</button>
-		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Submit</button>
+		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Cancel</button>
 	</div>
 </div>
 
 @code {
+	[Parameter]
+	public int AdminId { get; set; }
+
 	private int adminId = 0;
 	private string adminEmail = "";
 	private string adminPassword = "";
