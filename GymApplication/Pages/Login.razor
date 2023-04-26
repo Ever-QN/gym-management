@@ -1,6 +1,8 @@
 ﻿@page "/login"
 @using GymApplication.Models;
+@using GymApplication.Services;
 @inject NavigationManager NavigationManager;
+@inject AdminService adminService
 
 <h1>Administrator Login</h1>
 
@@ -33,12 +35,13 @@
             Password = "password"
         };
 
-    private string validEmail = "admin@example.ca";
-    private string validPassword = "password";
 
-    private void SubmitForm()
+    private async Task SubmitForm()
     {
-        if (loginModel.Email == validEmail && loginModel.Password == validPassword)
+        var admins = await adminService.GetAdminAsync();
+        var admin = admins.FirstOrDefault(a => a.AdminEmail == loginModel.Email && a.AdminPassword == loginModel.Password);
+
+        if (admin != null)
         {
             LoginModel.isAuthenticated = true;
             NavigationManager.NavigateTo("/dashboard");

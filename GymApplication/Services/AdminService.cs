@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GymApplication.Data;
+using Microsoft.AspNetCore.Components;
 using SQLite;
 
 namespace GymApplication.Services
