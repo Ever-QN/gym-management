@@ -1,13 +1,54 @@
 ﻿@page "/dashboard"
 @using GymApplication.Models
+@using GymApplication.Services
+@using GymApplication.Data
+@inject AdminService adminService
 
 <div class="container my-5">
     <h1>Welcome to Gym Management System</h1>
-    <p>Use the navigation bar to access the different features of the application.</p>
+    <p>Use the navigation bar to access the different features of the application.
+
+        Alternatively, below you can find all the tables from each section.
+    </p>
 </div>
 
+@if (admins == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (admins.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Admin Id</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var admin in admins)
+            {
+                <tr>
+                    <td>@admin.AdminId</td>
+                    <td>@admin.AdminEmail</td>
+                    <td>@admin.AdminPassword</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><em>No admins found.</em></p>
+}
 
 
 @code {
+    private IEnumerable<GymApplication.Data.AdminInfo> admins;
 
+    protected override async Task OnInitializedAsync()
+    {
+        admins = await adminService.GetAdminAsync();
+    }
 }
