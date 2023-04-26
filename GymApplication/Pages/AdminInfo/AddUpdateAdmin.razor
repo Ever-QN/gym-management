@@ -1,5 +1,5 @@
 ﻿@page "/addupdateadmin"
-@page "/updateproduct/{AdminId:int}"
+@page "/updateadmin/{AdminId:int}"
 @using GymApplication.Data
 @using GymApplication.Services
 @inject AdminService adminService
@@ -18,12 +18,12 @@
 			<input type="text" @bind="adminEmail" class="form-control" placeholder="Admin Email" />
 		</div>
 		<div class="mb-3">
-			<label class="form-label">Admin ID:</label>
+			<label class="form-label">Admin Password:</label>
 			<input type="text" @bind="adminPassword" class="form-control" placeholder="Admin Password" />
 		</div>
 
 		<button type="submit" class="btn btn-sm btn-success" @onclick="AddAdminInfo">Submit</button>
-		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Cancel</button>
+		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Back</button>
 	</div>
 </div>
 
