@@ -6,22 +6,32 @@
 
 <div class="container my-5">
     <h1>Welcome to Gym Management System</h1>
-    <p>Use the navigation bar to access the different features of the application.
+    <p>Use the navigation bar to access the different features of the application. <br />
 
-        Alternatively, below you can find all the tables from each section.
+        <strong>Note: If the navigation bar has multiple buttons highlighted at the same time, it means for the time being they are not yet developed/completed, and therefore will be inaccessible.</strong> <br /><br />
+
+        Alternatively, you can find all the tables from each category in the navigation bar below here.
     </p>
 </div>
+
 
 @if (admins == null)
 {
     <p><em>Loading...</em></p>
 }
-else if (admins.Any())
+else if (!admins.Any())
+{
+    <p><em>No data found.</em></p>
+}
+else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Admin Id</th>
+                <th colspan="3">Admin List</th>
+            </tr>
+            <tr>
+                <th>Admin ID</th>
                 <th>Email</th>
                 <th>Password</th>
             </tr>
@@ -32,15 +42,11 @@ else if (admins.Any())
                 <tr>
                     <td>@admin.AdminId</td>
                     <td>@admin.AdminEmail</td>
-                    <td>@admin.AdminPassword</td>
+                    <td><input type="password" value="@admin.AdminPassword" readonly /></td>
                 </tr>
             }
         </tbody>
     </table>
-}
-else
-{
-    <p><em>No admins found.</em></p>
 }
 
 
