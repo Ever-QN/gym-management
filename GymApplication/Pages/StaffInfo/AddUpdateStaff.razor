@@ -63,6 +63,24 @@
 	private string staffHireDate = "";
 	private double staffSalary = 0;
 
+
+	protected async override void OnInitialized()
+	{
+		base.OnInitialized();
+		staffId = StaffId;
+		if (staffId > 0) {
+			var response = await staffService.GetStaffAsync(StaffId);
+			staffId = response.StaffId;
+			staffFirstName = response.StaffFirstName;
+			staffLastName = response.StaffLastName;
+			staffEmail = response.StaffEmail;
+			staffPhoneNumber = response.StaffPhoneNumber;
+			staffPosition = response.StaffPosition;
+			staffHireDate = response.StaffHireDate;
+			staffSalary = response.StaffSalary;
+		}
+	}
+
 	public async void AddStaffInfo()
 	{
 		var staff = new StaffInfo();

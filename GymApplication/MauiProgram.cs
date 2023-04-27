@@ -26,8 +26,8 @@ public static class MauiProgram
 
 		var adminDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"AdminDB.db3");
 		builder.Services.AddSingleton<AdminService>(x => ActivatorUtilities.CreateInstance<AdminService>(x, adminDBPath));
-		//var staffDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"StaffDB.db3");
-		//builder.Services.AddSingleton<StaffService>(x => ActivatorUtilities.CreateInstance<StaffService>(x, staffDBPath));
+		var staffDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"StaffDB.db3");
+		builder.Services.AddSingleton<StaffService>(x => ActivatorUtilities.CreateInstance<StaffService>(x, staffDBPath));
 		return builder.Build();
 	}
 }
