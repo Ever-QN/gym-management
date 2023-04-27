@@ -1,46 +1,90 @@
 @page "/edit-billing"
 @using GymApplication.Data
 @using System.IO
-@using System.Xml.Serialization
-@inject NavigationManager NavigationManager
+@using System.Text.Json
 
-<h1>Edit Billing</h1>
+<h3>Billing Management</h3>
 
-<EditForm Model="@billingInfo" OnValidSubmit="SubmitForm" class="form-container">
+<EditForm Model="@billingModel" OnValidSubmit="SaveInvoiceToFile">
     <DataAnnotationsValidator />
 
     <div class="form-group">
-        <label for="customerId">Customer ID</label>
-        <input type="text" @bind="billingInfo.CustomerId" class="form-control" id="customerId" />
+        <label for="invoiceNumber">Invoice Number:</label>
+        <input type="text" @bind="InvoiceNumber" class="form-control" id="invoiceNumber" />
     </div>
 
     <div class="form-group">
-        <label for="amount">Amount</label>
-        <input type="number" @bind="billingInfo.Amount" class="form-control" id="amount" />
+        <label for="customerName">Customer Name:</label>
+        <input type="text" @bind="CustomerName" class="form-control" id="customerName" />
     </div>
 
     <div class="form-group">
-        <label for="invoiceDate">Invoice Date</label>
-        <input type="date" @bind="billingInfo.InvoiceDate" class="form-control" id="invoiceDate" />
+        <label for="membershipPlan">Membership Plan:</label>
+        <input type="text" @bind="MembershipPlan" class="form-control" id="membershipPlan" />
     </div>
 
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <div class="form-group">
+        <label for="amountPaid">Amount Paid:</label>
+        <input type="number" @bind="AmountPaid" class="form-control" id="amountPaid" />
+    </div>
+
+    <div class="form-group">
+        <label for="invoiceDate">Invoice Date:</label>
+        <input type="date" @bind="InvoiceDate" class="form-control" id="invoiceDate" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 </EditForm>
 
 @code {
-    BillingInfo billingInfo = new BillingInfo();
+    private string InvoiceNumber { get; set; }
+    private string CustomerName { get; set; }
+    private string MembershipPlan { get; set; }
+    private decimal AmountPaid { get; set; }
+    private DateTime InvoiceDate { get; set; } = DateTime.Now;
 
-    private void SubmitForm()
+    private BillingInfo billingModel = new BillingInfo();
+
+    private async Task SaveInvoiceToFile()
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(BillingInfo));
-        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "BillingInvoices.xml");
-
-        using (FileStream fileStream = new FileStream(filePath, FileMode.Append))
+        try
         {
-            serializer.Serialize(fileStream, billingInfo);
-        }
+            BillingInfo newBillingInfo = new BillingInfo
+                {
+                    InvoiceNumber = InvoiceNumber,
+                    CustomerName = CustomerName,
+                    MembershipPlan = MembershipPlan,
+                    AmountPaid = AmountPaid,
+                    InvoiceDate = InvoiceDate
+                };
 
-        billingInfo = new BillingInfo();
-        NavigationManager.NavigateTo("/dashboard");
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "BillingInvoices.txt");
+
+            List<BillingInfo> billingInfos = new List<BillingInfo>();
+            if (File.Exists(filePath))
+            {
+                string existingData = await File.ReadAllTextAsync(filePath);
+                billingInfos = JsonSerializer.Deserialize<List<BillingInfo>>(existingData);
+            }
+
+            billingInfos.Add(newBillingInfo);
+
+            string serializedData = JsonSerializer.Serialize(billingInfos);
+            await File.WriteAllTextAsync(filePath, serializedData);
+
+            ResetForm();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+    private void ResetForm()
+    {
+        InvoiceNumber = "";
+        CustomerName = "";
+        MembershipPlan = "";
+        AmountPaid = 0;
+        InvoiceDate = DateTime.Now;
     }
 }
