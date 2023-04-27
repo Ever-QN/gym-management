@@ -58,7 +58,7 @@
                     InvoiceDate = InvoiceDate
                 };
 
-            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "BillingInvoices.txt");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Invoices", "BillingInvoices.txt");
 
             List<BillingInfo> billingInfos = new List<BillingInfo>();
             if (File.Exists(filePath))
