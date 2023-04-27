@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +9,10 @@ namespace GymApplication.Data
 {
     public class BillingInfo
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
-        public string CustomerId { get; set; }
-
-        [Required]
-        public decimal Amount { get; set; }
-
-        [Required]
+        public string InvoiceNumber { get; set; }
+        public string CustomerName { get; set; }
+        public string MembershipPlan { get; set; }
+        public decimal AmountPaid { get; set; }
         public DateTime InvoiceDate { get; set; }
     }
 }
-
