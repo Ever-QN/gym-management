@@ -1,0 +1,46 @@
+@page "/edit-billing"
+@using GymApplication.Data
+@using System.IO
+@using System.Xml.Serialization
+@inject NavigationManager NavigationManager
+
+<h1>Edit Billing</h1>
+
+<EditForm Model="@billingInfo" OnValidSubmit="SubmitForm" class="form-container">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="customerId">Customer ID</label>
+        <input type="text" @bind="billingInfo.CustomerId" class="form-control" id="customerId" />
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" @bind="billingInfo.Amount" class="form-control" id="amount" />
+    </div>
+
+    <div class="form-group">
+        <label for="invoiceDate">Invoice Date</label>
+        <input type="date" @bind="billingInfo.InvoiceDate" class="form-control" id="invoiceDate" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
+
+@code {
+    BillingInfo billingInfo = new BillingInfo();
+
+    private void SubmitForm()
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(BillingInfo));
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "BillingInvoices.xml");
+
+        using (FileStream fileStream = new FileStream(filePath, FileMode.Append))
+        {
+            serializer.Serialize(fileStream, billingInfo);
+        }
+
+        billingInfo = new BillingInfo();
+        NavigationManager.NavigateTo("/dashboard");
+    }
+}
