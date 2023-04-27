@@ -24,8 +24,8 @@ public static class MauiProgram
 
 		builder.Services.AddBlazorStrap();
 
-		var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"AdminDB.db3");
-		builder.Services.AddSingleton<AdminService>(x => ActivatorUtilities.CreateInstance<AdminService>(x, dbPath));
+		var adminDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"AdminDB.db3");
+		builder.Services.AddSingleton<AdminService>(x => ActivatorUtilities.CreateInstance<AdminService>(x, adminDBPath));
         return builder.Build();
 	}
 }
