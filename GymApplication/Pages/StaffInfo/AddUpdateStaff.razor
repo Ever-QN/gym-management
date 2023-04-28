@@ -36,11 +36,11 @@
 			<input type="text" @bind="staffPosition" class="form-control" placeholder="Staff Position" />
 		</div>
 		<div class="mb-3">
-			<label class="form-label">Staff Hire Date:</label>
+			<label class="form-label">Staff Hire Date (YY/MM/DD):</label>
 			<input type="text" @bind="staffHireDate" class="form-control" placeholder="Staff Hire Date" />
 		</div>
 		<div class="mb-3">
-			<label class="form-label">Staff Salary:</label>
+			<label class="form-label">Staff Salary (Annualy):</label>
 			<input type="text" @bind="staffSalary" class="form-control" placeholder="Staff Salary" />
 		</div>
 
@@ -61,7 +61,7 @@
 	private string staffPhoneNumber = "";
 	private string staffPosition = "";
 	private string staffHireDate = "";
-	private double staffSalary = 0;
+	private string staffSalary = "";
 
 
 	protected async override void OnInitialized()
