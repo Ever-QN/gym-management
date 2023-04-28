@@ -41,6 +41,7 @@
         var admins = await adminService.GetAdminAsync();
         var admin = admins.FirstOrDefault(a => a.AdminEmail == loginModel.Email && a.AdminPassword == loginModel.Password);
 
+
         if (admin != null)
         {
             LoginModel.isAuthenticated = true;
@@ -48,9 +49,17 @@
         }
         else
         {
-            LoginModel.isAuthenticated = false;
-            loginModel.Password = "";
-            StateHasChanged();
+                LoginModel.isAuthenticated = false;
+                loginModel.Password = "";
+                StateHasChanged();
+        }
+
+        // Check if any admin account exists in the database
+        if (admins.Count() == 0)
+        {
+            var defaultAdmin = new GymApplication.Data.AdminInfo { AdminEmail = "admin@example.ca", AdminPassword = "password" };
+            await adminService.AddUpdateAdminAsync(defaultAdmin);
+            admin = defaultAdmin;
         }
     }
 }

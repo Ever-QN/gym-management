@@ -17,6 +17,6 @@ namespace GymApplication.Data
         public string StaffPhoneNumber { get; set; }
         public string StaffPosition { get; set; }
         public string StaffHireDate { get; set; }
-        public double StaffSalary { get; set; }
+        public string StaffSalary { get; set; }
     }
 }

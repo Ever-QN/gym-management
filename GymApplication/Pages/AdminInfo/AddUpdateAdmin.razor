@@ -35,6 +35,19 @@
 	private string adminEmail = "";
 	private string adminPassword = "";
 
+	protected async override void OnInitialized()
+	{
+		base.OnInitialized();
+		adminId = AdminId;
+		if (adminId > 0)
+		{
+			var response = await adminService.GetAdminAsync(adminId);
+			adminId = response.AdminId;
+			adminEmail = response.AdminEmail;
+			adminPassword = response.AdminPassword;
+		}
+	}
+
 	public async void AddAdminInfo()
 	{
 		var admin = new AdminInfo();

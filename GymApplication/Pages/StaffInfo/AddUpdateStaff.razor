@@ -1,0 +1,117 @@
+﻿@page "/addupdatestaff"
+@page "/updatestaff/{StaffId:int}"
+
+@using GymApplication.Services
+@using GymApplication.Data
+@inject StaffService staffService
+@inject NavigationManager navigationManager
+
+<h3>AddUpdateStaff</h3>
+
+<div class="row">
+	<div class="col-md-6">
+
+		<div class="mb-3">
+			<label class="form-label">Staff Id:</label>
+			<input type="text" @bind="staffId" class="form-control" placeholder="Staff Id" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Staff First Name:</label>
+			<input type="text" @bind="staffFirstName" class="form-control" placeholder="Staff First Name" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Staff Last Name:</label>
+			<input type="text" @bind="staffLastName" class="form-control" placeholder="Staff Last Name" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Staff Email:</label>
+			<input type="text" @bind="staffEmail" class="form-control" placeholder="Staff Email" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Staff Phone Number:</label>
+			<input type="text" @bind="staffPhoneNumber" class="form-control" placeholder="Staff Phone Number" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Staff Position:</label>
+			<input type="text" @bind="staffPosition" class="form-control" placeholder="Staff Position" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Staff Hire Date (YY/MM/DD):</label>
+			<input type="text" @bind="staffHireDate" class="form-control" placeholder="Staff Hire Date" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Staff Salary (Annualy):</label>
+			<input type="text" @bind="staffSalary" class="form-control" placeholder="Staff Salary" />
+		</div>
+
+
+		<button type="submit" class="btn btn-sm btn-success" @onclick="AddStaffInfo">Submit</button>
+		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Back</button>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public int StaffId { get; set; }
+
+	private int staffId = 0;
+	private string staffFirstName = "";
+	private string staffLastName = "";
+	private string staffEmail = "";
+	private string staffPhoneNumber = "";
+	private string staffPosition = "";
+	private string staffHireDate = "";
+	private string staffSalary = "";
+
+
+	protected async override void OnInitialized()
+	{
+		base.OnInitialized();
+		staffId = StaffId;
+		if (staffId > 0) {
+			var response = await staffService.GetStaffAsync(StaffId);
+			staffId = response.StaffId;
+			staffFirstName = response.StaffFirstName;
+			staffLastName = response.StaffLastName;
+			staffEmail = response.StaffEmail;
+			staffPhoneNumber = response.StaffPhoneNumber;
+			staffPosition = response.StaffPosition;
+			staffHireDate = response.StaffHireDate;
+			staffSalary = response.StaffSalary;
+		}
+	}
+
+	public async void AddStaffInfo()
+	{
+		var staff = new StaffInfo();
+		staff.StaffId = staffId;
+		staff.StaffFirstName = staffFirstName;
+		staff.StaffLastName = staffLastName;
+		staff.StaffEmail = staffEmail;
+		staff.StaffPhoneNumber = staffPhoneNumber;
+		staff.StaffPosition = staffPosition;
+		staff.StaffHireDate = staffHireDate;
+		staff.StaffSalary = staffSalary;
+
+		var response = await staffService.AddUpdateStaffAsync(staff);
+		if (response)
+		{
+			if (staffId == 0)
+			{
+				await App.Current.MainPage.DisplayAlert("Saved", "Save Success", "OK");
+			}
+			else
+			{
+				await App.Current.MainPage.DisplayAlert("Updated", "Update Success", "OK");
+			}
+		}
+		else
+		{
+			await App.Current.MainPage.DisplayAlert("Saved", "Save File", "OK");
+		}
+	}
+	public void BackToList()
+	{
+		navigationManager.NavigateTo("staffList");
+	}
+}

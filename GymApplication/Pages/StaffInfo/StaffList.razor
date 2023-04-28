@@ -1,0 +1,77 @@
+﻿@page "/staffList"
+
+@using GymApplication.Services
+@using GymApplication.Data
+@inject StaffService staffService
+@inject NavigationManager navigationManager
+
+<h3>StaffList</h3>
+
+@if (staffList == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<button class="btn btn-primary" @onclick="AddNewStaff">Add New Staff Member</button>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Phone Number</th>
+				<th>Position</th>
+				<th>Hire Date</th>
+				<th>Salary</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var staff in staffList)
+			{
+				<tr>
+					<td>@staff.StaffId</td>
+					<td>@staff.StaffFirstName</td>
+					<td>@staff.StaffLastName</td>
+					<td>@staff.StaffEmail</td>
+					<td>@staff.StaffPhoneNumber</td>
+					<td>@staff.StaffPosition</td>
+					<td>@staff.StaffHireDate</td>
+					<td>@staff.StaffSalary</td>
+					<td>
+						<button class="btn btn-info" @onclick=@(() => UpdateStaff(staff))>Edit</button>
+						<button class="btn btn-info" @onclick=@(() => DeleteStaff(staff))>Delete</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+
+	private IEnumerable<StaffInfo> staffList;
+
+	protected async override Task OnInitializedAsync()
+	{
+		staffList = await staffService.GetStaffAsync();
+	}
+
+	public void AddNewStaff()
+	{
+		navigationManager.NavigateTo("addupdatestaff");
+	}
+
+	public void UpdateStaff(StaffInfo staffInfo)
+	{
+		navigationManager.NavigateTo($"updatestaff/{staffInfo.StaffId}");
+	}
+
+	public async void DeleteStaff(StaffInfo staffInfo)
+	{
+		await staffService.DeleteStaffAsync(staffInfo.StaffId);
+		staffList = await staffService.GetStaffAsync();
+		this.StateHasChanged();
+	}
+}
