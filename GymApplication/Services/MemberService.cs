@@ -42,9 +42,9 @@ namespace GymApplication.Services
 			return await Task.FromResult(true);
 		}
 
-		public async Task<bool> DeleteMemberAsync(int memberId)
+		public async Task<bool> DeleteMemberAsync(int customerId)
 		{
-			await con.DeleteAsync<MembershipInfo>(memberId);
+			await con.DeleteAsync<MembershipInfo>(customerId);
 			return await Task.FromResult(true);
 		}
 
