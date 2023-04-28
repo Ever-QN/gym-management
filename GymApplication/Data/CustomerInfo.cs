@@ -7,8 +7,8 @@ using SQLite;
 
 namespace GymApplication.Data
 {
-    public class CustomerInfo
-    {
+    public class CustomerInfo : Interfaces.ICustomer
+	{
 		[PrimaryKey, AutoIncrement]
 		public int CustomerId { get; set; }
 		public string CustomerFirst { get; set; }
