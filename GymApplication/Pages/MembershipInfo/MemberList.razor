@@ -1,0 +1,74 @@
+﻿@page "/memberList"
+@using GymApplication.Services
+@using GymApplication.Data
+@using MembershipInfo
+@inject MemberService memberService
+@inject NavigationManager navigationManager
+
+
+<h3>Manage Members</h3>
+
+@if (memberList == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<button class="btn btn-primary" @onclick="AddNewMember">Add New</button>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Phone Number</th>
+				<th>Membership Type</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var member in memberList)
+				{
+				<tr>
+					<td>@member.CustomerId</td>
+					<td>@member.CustomerFirst</td>
+					<td>@member.CustomerLast</td>
+					<td>@member.CustomerEmail</td>
+					<td>@member.CustomerPhone</td>
+					<td>@member.MembershipType</td>
+					<td>
+						<button class="btn btn-info" @onclick=@(() => UpdateMember(member))>Edit</button>
+						<button class="btn btn-info" @onclick=@(() => DeleteMember(member))>Delete</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private IEnumerable<MembershipInfo> memberList;
+
+
+	protected async override Task OnInitializedAsync()
+	{
+		memberList = await memberService.GetMemberAsync();
+	}
+
+	public void AddNewMember()
+	{
+		navigationManager.NavigateTo("addupdatemember");
+	}
+
+	public void UpdateMember(MembershipInfo memberInfo)
+	{
+		navigationManager.NavigateTo($"updatemember/{memberInfo.CustomerId}");
+	}
+
+	public async void DeleteMember(MembershipInfo memberInfo)
+	{
+		await memberService.DeleteMemberAsync(memberInfo.CustomerId);
+		memberList = await memberService.GetMemberAsync();
+		this.StateHasChanged();
+	}
+}

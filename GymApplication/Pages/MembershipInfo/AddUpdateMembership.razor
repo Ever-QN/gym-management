@@ -1,5 +1,90 @@
-﻿<h3>AddUpdateManagement</h3>
+﻿@page "/addupdatemember"
+@page "/updatemember/{CustomerId:int}"
+
+@using GymApplication.Data
+@using GymApplication.Services
+
+@inject MemberService memberService
+@inject NavigationManager navigationManager
+
+<h3>Edit Member Info</h3>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="mb-3">
+			<label class="form-label">Member ID:</label>
+			<input type="text" @bind="memberId" class="form-control" placeholder="Member ID" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Member First Name:</label>
+			<input type="text" @bind="memberFirst" class="form-control" placeholder="First Name" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Member Last Name:</label>
+			<input type="text" @bind="memberLast" class="form-control" placeholder="Last Name" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Customer Email:</label>
+			<input type="text" @bind="memberEmail" class="form-control" placeholder="Email" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Member Phone Number:</label>
+			<input type="text" @bind="memberPhone" class="form-control" placeholder="Phone Number" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Membership Type:</label>
+			<input type="text" @bind="membershipType" class="form-control" placeholder="Bronze/Silver/Gold/Plantinum" />
+		</div>
+
+		<button type="submit" class="btn btn-sm btn-success" @onclick="AddCustomerInfo">Submit</button>
+		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Back</button>
+	</div>
+</div>
 
 @code {
+	[Parameter]
+	public int MemberId { get; set; }
 
+	private int memberId = 0;
+	private string memberFirst = "";
+	private string memberLast = "";
+	private string memberEmail = "";
+	private string memberPhone = "";
+	private string membershipType = "";
+
+	public async void AddCustomerInfo()
+	{
+		var member = new MembershipInfo();
+		member.CustomerId = memberId;
+		member.CustomerFirst = memberFirst;
+		member.CustomerLast = memberLast;
+		member.CustomerEmail = memberEmail;
+		member.CustomerPhone = memberPhone;
+		member.MembershipType = membershipType;
+
+
+		var response = await memberService.AddUpdateMemberAsync(member);
+		if (response)
+		{
+			if (memberId == 0)
+			{
+				await App.Current.MainPage.DisplayAlert("Saved", "Save Successful", "OK");
+				navigationManager.NavigateTo("memberList");
+			}
+			else
+			{
+				await App.Current.MainPage.DisplayAlert("Updated", "Update Successful", "OK");
+				navigationManager.NavigateTo("memberList");
+			}
+		}
+		else
+		{
+			await App.Current.MainPage.DisplayAlert("Saved", "Saved File", "OK");
+		}
+	}
+
+	public void BackToList()
+	{
+		navigationManager.NavigateTo("memberList");
+	}
 }

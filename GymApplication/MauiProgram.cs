@@ -28,6 +28,10 @@ public static class MauiProgram
 		builder.Services.AddSingleton<AdminService>(x => ActivatorUtilities.CreateInstance<AdminService>(x, adminDBPath));
 		var staffDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"StaffDB.db3");
 		builder.Services.AddSingleton<StaffService>(x => ActivatorUtilities.CreateInstance<StaffService>(x, staffDBPath));
+		var customerDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"CustomerDB.db3");
+		builder.Services.AddSingleton<CustomerService>(x => ActivatorUtilities.CreateInstance<CustomerService>(x, customerDBPath));
+		var memberDBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"MemberDB.db3");
+		builder.Services.AddSingleton<MemberService>(x => ActivatorUtilities.CreateInstance<MemberService>(x, memberDBPath));
 		return builder.Build();
 	}
 }

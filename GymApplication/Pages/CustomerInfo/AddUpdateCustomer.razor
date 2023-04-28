@@ -17,23 +17,23 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Customer First Name:</label>
-			<input type="text" @bind="customerFirst" class="form-control" placeholder="Customer First Name" />
+			<input type="text" @bind="customerFirst" class="form-control" placeholder="First Name" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Customer Last Name:</label>
-			<input type="text" @bind="customerLast" class="form-control" placeholder="Customer Last Name" />
+			<input type="text" @bind="customerLast" class="form-control" placeholder="Last Name" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Customer Email:</label>
-			<input type="text" @bind="customerEmail" class="form-control" placeholder="Customer Email" />
+			<input type="text" @bind="customerEmail" class="form-control" placeholder="Email" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Customer Phone Number:</label>
-			<input type="text" @bind="customerPhone" class="form-control" placeholder="Customer Phone Number" />
+			<input type="text" @bind="customerPhone" class="form-control" placeholder="Phone Number" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Customer Membership:</label>
-			<input type="text" @bind="customerMember" class="form-control" placeholder="Customer Membership" />
+			<input type="text" @bind="customerMember" class="form-control" placeholder="Yes/No" />
 		</div>
 
 		<button type="submit" class="btn btn-sm btn-success" @onclick="AddCustomerInfo">Submit</button>
@@ -69,10 +69,12 @@
 			if (customerId == 0)
 			{
 				await App.Current.MainPage.DisplayAlert("Saved", "Save Successful", "OK");
+				navigationManager.NavigateTo("customerList");
 			}
 			else
 			{
 				await App.Current.MainPage.DisplayAlert("Updated", "Update Successful", "OK");
+				navigationManager.NavigateTo("customerList");
 			}
 		}
 		else
