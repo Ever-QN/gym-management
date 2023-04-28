@@ -41,7 +41,7 @@
     private string CustomerName { get; set; }
     private string MembershipPlan { get; set; }
     private decimal AmountPaid { get; set; }
-    private DateTime InvoiceDate { get; set; } = DateTime.Now;
+    private DateTime InvoiceDate { get; set; }
 
     private BillingInfo billingModel = new BillingInfo();
 
@@ -58,7 +58,13 @@
                     InvoiceDate = InvoiceDate
                 };
 
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Invoices", "BillingInvoices.txt");
+            string directoryPath = Path.Combine(Environment.CurrentDirectory, "invoices");
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string filePath = Path.Combine(directoryPath, "BillingInvoices.txt");
 
             List<BillingInfo> billingInfos = new List<BillingInfo>();
             if (File.Exists(filePath))
@@ -79,6 +85,7 @@
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
+
     private void ResetForm()
     {
         InvoiceNumber = "";
