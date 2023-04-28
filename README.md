@@ -11,7 +11,7 @@ This gym management system includes the following features:
 -Membership management (create, update, and delete memberships) <br>
 -Customer management (create, update, and delete customer profiles) <br>
 -Staff management (create, update, and delete staff profiles) <br>
--Billing management (Generate invoices and save them to an invoices folder, allowing for organized archiving). When submitting an invoice, text file will be saved to user's documents folder<br>
+-Billing management (Generate invoices and save them to an invoices folder, allowing for organized archiving). When submitting an invoice, text file will be saved to the user's documents folder)<br>
 
 ## Usage ##
 
