@@ -3,6 +3,8 @@
 @using GymApplication.Services
 @using GymApplication.Data
 @inject AdminService adminService
+@inject StaffService staffService
+@inject CustomerService customerService
 
 <div class="container my-5">
     <h1>Welcome to Gym Management System</h1>
@@ -12,49 +14,99 @@
 
         Alternatively, you can find all the tables from each category in the navigation bar below here.
     </p>
+
+    <div class="admin-table">
+        @if (admins == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else if (!admins.Any())
+        {
+            <p><em>No data found.</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3">Admin List</th>
+                    </tr>
+                    <tr>
+                        <th>Admin ID</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var admin in admins)
+                    {
+                        <tr>
+                            <td>@admin.AdminId</td>
+                            <td>@admin.AdminEmail</td>
+                            <td><input type="password" value="@admin.AdminPassword" readonly /></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+   <div class="customer-table">
+        @if (customers == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else if (!customers.Any())
+        {
+            <p><em>No data found.</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3">Customer List</th>
+                    </tr>
+                    <tr>
+                        <th>Customer Id</th>
+                        <th>Customer First Name</th>
+                        <th>Customer Last Name</th>
+                        <th>Customer Email</th>
+                        <th>Customer Phone</th>
+                        <th>Customer Membership</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in customers)
+                    {
+                        <tr>
+                            <td>@customer.CustomerId</td>
+                            <td>@customer.CustomerFirst</td>
+                            <td>@customer.CustomerLast</td>
+                            <td>@customer.CustomerEmail</td>
+                            <td>@customer.CustomerPhone</td>
+                            <td>@customer.CustomerMember</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+   </div>
+
+   <div class="staff-table">
+
+   </div>
 </div>
-
-
-@if (admins == null)
-{
-    <p><em>Loading...</em></p>
-}
-else if (!admins.Any())
-{
-    <p><em>No data found.</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th colspan="3">Admin List</th>
-            </tr>
-            <tr>
-                <th>Admin ID</th>
-                <th>Email</th>
-                <th>Password</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var admin in admins)
-            {
-                <tr>
-                    <td>@admin.AdminId</td>
-                    <td>@admin.AdminEmail</td>
-                    <td><input type="password" value="@admin.AdminPassword" readonly /></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
 
 @code {
     private IEnumerable<GymApplication.Data.AdminInfo> admins;
+    private IEnumerable<GymApplication.Data.StaffInfo> staff;
+    private IEnumerable<GymApplication.Data.CustomerInfo> customers;
 
     protected override async Task OnInitializedAsync()
     {
         admins = await adminService.GetAdminAsync();
+        staff = await staffService.GetStaffAsync();
+        customers = await customerService.GetCustomerAsync();
+        
     }
 }

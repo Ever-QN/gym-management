@@ -60,7 +60,7 @@
             Console.WriteLine($"Error: {ex.Message}");
         }
 
-        // Check if any admin account exists in the database
+        // Check if any admin account exists in the database, if not then create a default account
         if (admins.Count() == 0)
         {
             var defaultAdmin = new GymApplication.Data.AdminInfo { AdminEmail = "admin@example.ca", AdminPassword = "password" };
