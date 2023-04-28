@@ -1,0 +1,88 @@
+﻿@page "/addupdatecustomer"
+@page "/updatecustomer/{CustomerId:int}"
+
+@using GymApplication.Data
+@using GymApplication.Services
+
+@inject CustomerService customerService
+@inject NavigationManager navigationManager
+
+<h3>Edit Customer Info</h3>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="mb-3">
+			<label class="form-label">Customer ID:</label>
+			<input type="text" @bind="customerId" class="form-control" placeholder="Customer ID" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Customer First Name:</label>
+			<input type="text" @bind="customerFirst" class="form-control" placeholder="Customer First Name" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Customer Last Name:</label>
+			<input type="text" @bind="customerLast" class="form-control" placeholder="Customer Last Name" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Customer Email:</label>
+			<input type="text" @bind="customerEmail" class="form-control" placeholder="Customer Email" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Customer Phone Number:</label>
+			<input type="text" @bind="customerPhone" class="form-control" placeholder="Customer Phone Number" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Customer Membership:</label>
+			<input type="text" @bind="customerMember" class="form-control" placeholder="Customer Membership" />
+		</div>
+
+		<button type="submit" class="btn btn-sm btn-success" @onclick="AddCustomerInfo">Submit</button>
+		<button type="submit" class="btn btn-sm btn-success" @onclick="BackToList">Back</button>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public int CustomerId { get; set; }
+
+	private int customerId = 0;
+	private string customerFirst =  "";
+	private string customerLast = "";
+	private string customerEmail = "";
+	private string customerPhone = "";
+	private string customerMember = "";
+
+	public async void AddCustomerInfo()
+	{
+		var customer = new CustomerInfo();
+		customer.CustomerId = customerId;
+		customer.CustomerFirst = customerFirst;
+		customer.CustomerLast = customerLast;
+		customer.CustomerEmail = customerEmail;
+		customer.CustomerPhone = customerPhone;
+		customer.CustomerMember = customerMember;
+
+
+		var response = await customerService.AddUpdateCustomerAsync(customer);
+		if (response)
+		{
+			if (customerId == 0)
+			{
+				await App.Current.MainPage.DisplayAlert("Saved", "Save Successful", "OK");
+			}
+			else
+			{
+				await App.Current.MainPage.DisplayAlert("Updated", "Update Successful", "OK");
+			}
+		}
+		else
+		{
+			await App.Current.MainPage.DisplayAlert("Saved", "Saved File", "OK");
+		}
+	}
+
+	public void BackToList()
+	{
+		navigationManager.NavigateTo("customerList");
+	}
+}
