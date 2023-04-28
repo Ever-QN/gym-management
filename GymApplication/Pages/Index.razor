@@ -15,6 +15,94 @@
         Alternatively, you can find all the tables from each category in the navigation bar below here.
     </p>
 
+   <div class="customer-table">
+        @if (customers == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else if (!customers.Any())
+        {
+            <p><em>No data found.</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="6">Customer List</th>
+                    </tr>
+                    <tr>
+                        <th>Customer Id</th>
+                        <th>Customer First Name</th>
+                        <th>Customer Last Name</th>
+                        <th>Customer Email</th>
+                        <th>Customer Phone</th>
+                        <th>Customer Membership</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in customers)
+                    {
+                        <tr>
+                            <td>@customer.CustomerId</td>
+                            <td>@customer.CustomerFirst</td>
+                            <td>@customer.CustomerLast</td>
+                            <td>@customer.CustomerEmail</td>
+                            <td>@customer.CustomerPhone</td>
+                            <td>@customer.CustomerMember</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+   </div>
+
+   <div class="staff-table">
+        @if (staff == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else if (!staff.Any())
+        {
+            <p><em>No data found.</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="8">Staff List</th>
+                    </tr>
+                    <tr>
+                        <th>Staff Id</th>
+                        <th>Staff First Name</th>
+                        <th>Staff Last Name</th>
+                        <th>Staff Email</th>
+                        <th>Staff Phone</th>
+                        <th>Staff Position</th>
+                        <th>Staff Hire Date</th>
+                        <th>Staff Salary ($CAD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in staff)
+                    {
+                        <tr>
+                            <td>@employee.StaffId</td>
+                            <td>@employee.StaffFirstName</td>
+                            <td>@employee.StaffLastName</td>
+                            <td>@employee.StaffEmail</td>
+                            <td>@employee.StaffPhoneNumber</td>
+                            <td>@employee.StaffPosition</td>
+                            <td>@employee.StaffHireDate</td>
+                            <td>@employee.StaffSalary</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+   </div>
+
     <div class="admin-table">
         @if (admins == null)
         {
@@ -50,51 +138,6 @@
             </table>
         }
     </div>
-   <div class="customer-table">
-        @if (customers == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else if (!customers.Any())
-        {
-            <p><em>No data found.</em></p>
-        }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th colspan="3">Customer List</th>
-                    </tr>
-                    <tr>
-                        <th>Customer Id</th>
-                        <th>Customer First Name</th>
-                        <th>Customer Last Name</th>
-                        <th>Customer Email</th>
-                        <th>Customer Phone</th>
-                        <th>Customer Membership</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var customer in customers)
-                    {
-                        <tr>
-                            <td>@customer.CustomerId</td>
-                            <td>@customer.CustomerFirst</td>
-                            <td>@customer.CustomerLast</td>
-                            <td>@customer.CustomerEmail</td>
-                            <td>@customer.CustomerPhone</td>
-                            <td>@customer.CustomerMember</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-   </div>
-
-   <div class="staff-table">
-
-   </div>
 </div>
 
 @code {
