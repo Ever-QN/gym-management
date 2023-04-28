@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <label for="invoiceNumber">Invoice Number:</label>
-        <input type="text" @bind="InvoiceNumber" class="form-control" id="invoiceNumber" />
+        <input type="text" value="@InvoiceNumber" readonly class="form-control" id="invoiceNumber" />
     </div>
 
     <div class="form-group">
@@ -41,9 +41,20 @@
     private string CustomerName { get; set; }
     private string MembershipPlan { get; set; }
     private decimal AmountPaid { get; set; }
-    private DateTime InvoiceDate { get; set; }
+    private DateTime InvoiceDate { get; set; } = DateTime.Now;
 
     private BillingInfo billingModel = new BillingInfo();
+
+    protected override void OnInitialized()
+    {
+        GenerateUniqueInvoiceNumber();
+    }
+
+    private void GenerateUniqueInvoiceNumber()
+    {
+        Random random = new Random();
+        InvoiceNumber = random.Next(100000, 1000000).ToString();
+    }
 
     private async Task SaveInvoiceToFile()
     {
@@ -58,13 +69,7 @@
                     InvoiceDate = InvoiceDate
                 };
 
-            string directoryPath = Path.Combine(Environment.CurrentDirectory, "invoices");
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-
-            string filePath = Path.Combine(directoryPath, "BillingInvoices.txt");
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "BillingInvoices.txt");
 
             List<BillingInfo> billingInfos = new List<BillingInfo>();
             if (File.Exists(filePath))
@@ -88,10 +93,10 @@
 
     private void ResetForm()
     {
-        InvoiceNumber = "";
         CustomerName = "";
         MembershipPlan = "";
         AmountPaid = 0;
         InvoiceDate = DateTime.Now;
+        GenerateUniqueInvoiceNumber();
     }
 }

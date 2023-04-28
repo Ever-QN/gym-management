@@ -1,13 +1,18 @@
 ﻿@page "/"
 @inject NavigationManager navigationManager
 
-<h3>Startup</h3>
-
-Loading....
+<h1>Loading....</h1>
 
 @code {
 	protected async override Task OnInitializedAsync()
 	{
-		await Task.Run(() => navigationManager.NavigateTo("/login"));
+		try
+		{
+			await Task.Run(() => navigationManager.NavigateTo("/login"));
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error: {ex.Message}");
+		}
 	}
 }
