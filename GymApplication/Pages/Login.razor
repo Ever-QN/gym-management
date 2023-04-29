@@ -11,13 +11,13 @@
     <DataAnnotationsValidator />
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" @bind="loginModel.Email" class="form-control" placeholder="admin@example.ca" id="email" />
+        <input type="email" @bind="loginModel.Email" class="form-control" placeholder="Enter email" id="email" />
         <ValidationMessage For="@(()=> loginModel.Email)" />
     </div>
 
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" @bind="loginModel.Password" class="form-control" placeholder="password" id="password">
+        <input type="password" @bind="loginModel.Password" class="form-control" placeholder="Enter password" id="password">
         <ValidationMessage For="@(()=> loginModel.Password)" />
     </div>
 
