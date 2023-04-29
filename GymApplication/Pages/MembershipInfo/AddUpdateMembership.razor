@@ -13,23 +13,23 @@
 	<div class="col-md-6">
 		<div class="mb-3">
 			<label class="form-label">Member ID:</label>
-			<input type="text" @bind="memberId" class="form-control" placeholder="Member ID" />
+			<input type="text" @bind="customerId" class="form-control" placeholder="Member ID" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Member First Name:</label>
-			<input type="text" @bind="memberFirst" class="form-control" placeholder="First Name" />
+			<input type="text" @bind="customerFirst" class="form-control" placeholder="First Name" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Member Last Name:</label>
-			<input type="text" @bind="memberLast" class="form-control" placeholder="Last Name" />
+			<input type="text" @bind="customerLast" class="form-control" placeholder="Last Name" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Customer Email:</label>
-			<input type="text" @bind="memberEmail" class="form-control" placeholder="Email" />
+			<input type="text" @bind="customerEmail" class="form-control" placeholder="Email" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Member Phone Number:</label>
-			<input type="text" @bind="memberPhone" class="form-control" placeholder="Phone Number" />
+			<input type="text" @bind="customerPhone" class="form-control" placeholder="Phone Number" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Membership Type:</label>
@@ -43,30 +43,30 @@
 
 @code {
 	[Parameter]
-	public int MemberId { get; set; }
+	public int CustomerId { get; set; }
 
-	private int memberId = 0;
-	private string memberFirst = "";
-	private string memberLast = "";
-	private string memberEmail = "";
-	private string memberPhone = "";
+	private int customerId = 0;
+	private string customerFirst = "";
+	private string customerLast = "";
+	private string customerEmail = "";
+	private string customerPhone = "";
 	private string membershipType = "";
 
 	public async void AddCustomerInfo()
 	{
 		var member = new MembershipInfo();
-		member.CustomerId = memberId;
-		member.CustomerFirst = memberFirst;
-		member.CustomerLast = memberLast;
-		member.CustomerEmail = memberEmail;
-		member.CustomerPhone = memberPhone;
+		member.CustomerId = customerId;
+		member.CustomerFirst = customerFirst;
+		member.CustomerLast = customerLast;
+		member.CustomerEmail = customerEmail;
+		member.CustomerPhone = customerPhone;
 		member.MembershipType = membershipType;
 
 
 		var response = await memberService.AddUpdateMemberAsync(member);
 		if (response)
 		{
-			if (memberId == 0)
+			if (customerId == 0)
 			{
 				await App.Current.MainPage.DisplayAlert("Saved", "Save Successful", "OK");
 				navigationManager.NavigateTo("memberList");
