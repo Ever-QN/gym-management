@@ -5,12 +5,11 @@
 @inject AdminService adminService
 @inject StaffService staffService
 @inject CustomerService customerService
+@inject MemberService memberService
 
 <div class="container my-5">
     <h1>Welcome to Gym Management System</h1>
-    <p>Use the navigation bar to access the different features of the application. <br />
-
-        <strong>Note: If the navigation bar has multiple buttons highlighted at the same time, it means for the time being they are not yet developed/completed, and therefore will be inaccessible.</strong> <br /><br />
+    <p>Use the navigation bar to access the different features of the application. <br /> <br /><br />
 
         Alternatively, you can find all the tables from each category in the navigation bar below here.
     </p>
@@ -144,6 +143,7 @@
     private IEnumerable<GymApplication.Data.AdminInfo> admins;
     private IEnumerable<GymApplication.Data.StaffInfo> staff;
     private IEnumerable<GymApplication.Data.CustomerInfo> customers;
+    private IEnumerable<GymApplication.Data.MembershipInfo> members;
 
     protected override async Task OnInitializedAsync()
     {
